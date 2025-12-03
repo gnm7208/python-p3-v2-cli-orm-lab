@@ -125,4 +125,10 @@ def delete_employee():
 
 
 def list_department_employees():
-    pass
+    id_ = input("Enter the department's id: ")
+    if department := Department.find_by_id(id_):
+        employees = department.employees()
+        for employee in employees:
+            print(employee)
+    else:
+        print(f'Department {id_} not found')
