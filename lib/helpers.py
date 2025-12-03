@@ -84,8 +84,11 @@ def find_employee_by_name():
 def find_employee_by_id():
     """Find and display an employee by ID"""
     id_ = input("Enter the employee's id: ")
-    employee = Employee.find_by_id(id_)
-    print(employee) if employee else print(f'Employee {id_} not found')
+    try:
+        employee = Employee.find_by_id(int(id_))
+        print(employee) if employee else print(f'Employee {id_} not found')
+    except ValueError:
+        print("Error: Employee ID must be a number")
 
 
 def create_employee():
@@ -134,19 +137,25 @@ def update_employee():
 def delete_employee():
     """Delete an employee from the database"""
     id_ = input("Enter the employee's id: ")
-    if employee := Employee.find_by_id(id_):
-        employee.delete()
-        print(f'Employee {id_} deleted')
-    else:
-        print(f'Employee {id_} not found')
+    try:
+        if employee := Employee.find_by_id(int(id_)):
+            employee.delete()
+            print(f'Employee {id_} deleted')
+        else:
+            print(f'Employee {id_} not found')
+    except ValueError:
+        print("Error: Employee ID must be a number")
 
 
 def list_department_employees():
     """List all employees in a specific department"""
     id_ = input("Enter the department's id: ")
-    if department := Department.find_by_id(id_):
-        employees = department.employees()
-        for employee in employees:
-            print(employee)
-    else:
-        print(f'Department {id_} not found')
+    try:
+        if department := Department.find_by_id(int(id_)):
+            employees = department.employees()
+            for employee in employees:
+                print(employee)
+        else:
+            print(f'Department {id_} not found')
+    except ValueError:
+        print("Error: Department ID must be a number")
