@@ -121,6 +121,7 @@ def update_employee():
 
 
 def delete_employee():
+    """Delete an employee from the database"""
     id_ = input("Enter the employee's id: ")
     if employee := Employee.find_by_id(id_):
         employee.delete()
@@ -130,6 +131,7 @@ def delete_employee():
 
 
 def list_department_employees():
+    """List all employees in a specific department"""
     id_ = input("Enter the department's id: ")
     if department := Department.find_by_id(id_):
         employees = department.employees()
