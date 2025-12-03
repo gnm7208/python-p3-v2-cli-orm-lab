@@ -89,6 +89,7 @@ def find_employee_by_id():
 
 
 def create_employee():
+    """Create a new employee with input validation"""
     name = input("Enter the employee's name: ")
     job_title = input("Enter the employee's job title: ")
     department_id = input("Enter the employee's department id: ")
@@ -100,6 +101,7 @@ def create_employee():
 
 
 def update_employee():
+    """Update an existing employee with input validation"""
     id_ = input("Enter the employee's id: ")
     if employee := Employee.find_by_id(id_):
         try:
