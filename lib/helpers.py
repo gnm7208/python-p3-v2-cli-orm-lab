@@ -94,8 +94,14 @@ def create_employee():
     job_title = input("Enter the employee's job title: ")
     department_id = input("Enter the employee's department id: ")
     try:
-        employee = Employee.create(name, job_title, int(department_id))
+        dept_id = int(department_id)
+        employee = Employee.create(name, job_title, dept_id)
         print(f'Success: {employee}')
+    except ValueError as ve:
+        if "invalid literal" in str(ve):
+            print("Error creating employee: Department ID must be a number")
+        else:
+            print("Error creating employee: ", ve)
     except Exception as exc:
         print("Error creating employee: ", exc)
 
