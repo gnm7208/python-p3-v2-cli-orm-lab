@@ -112,26 +112,30 @@ def create_employee():
 def update_employee():
     """Update an existing employee with input validation"""
     id_ = input("Enter the employee's id: ")
-    if employee := Employee.find_by_id(id_):
-        try:
-            name = input("Enter the employees's new name: ")
-            employee.name = name
-            job_title = input("Enter the employee's new job title: ")
-            employee.job_title = job_title
-            department_id = input("Enter the employees's new department id: ")
-            employee.department_id = int(department_id)
-            
-            employee.update()
-            print(f'Success: {employee}')
-        except ValueError as ve:
-            if "invalid literal" in str(ve):
-                print("Error updating employee: Department ID must be a number")
-            else:
-                print("Error updating employee: ", ve)
-        except Exception as exc:
-            print("Error updating employee: ", exc)
-    else:
-        print(f'Employee {id_} not found')
+    try:
+        employee_id = int(id_)
+        if employee := Employee.find_by_id(employee_id):
+            try:
+                name = input("Enter the employees's new name: ")
+                employee.name = name
+                job_title = input("Enter the employee's new job title: ")
+                employee.job_title = job_title
+                department_id = input("Enter the employees's new department id: ")
+                employee.department_id = int(department_id)
+                
+                employee.update()
+                print(f'Success: {employee}')
+            except ValueError as ve:
+                if "invalid literal" in str(ve):
+                    print("Error updating employee: Department ID must be a number")
+                else:
+                    print("Error updating employee: ", ve)
+            except Exception as exc:
+                print("Error updating employee: ", exc)
+        else:
+            print(f'Employee {id_} not found')
+    except ValueError:
+        print("Error: Employee ID must be a number")
 
 
 def delete_employee():
