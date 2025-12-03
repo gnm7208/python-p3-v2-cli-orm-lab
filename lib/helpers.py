@@ -120,6 +120,11 @@ def update_employee():
             
             employee.update()
             print(f'Success: {employee}')
+        except ValueError as ve:
+            if "invalid literal" in str(ve):
+                print("Error updating employee: Department ID must be a number")
+            else:
+                print("Error updating employee: ", ve)
         except Exception as exc:
             print("Error updating employee: ", exc)
     else:
